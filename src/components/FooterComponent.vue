@@ -4,49 +4,53 @@
             <div class="max-w-[1280px] mx-auto px-6">
                 <div class="footer-grid">
                     <div class="footer-col">
-                        <a href="#" class="footer-logo">ChemLink 衢州化联</a>
+                        <a href="#" class="footer-logo">{{ t("footer.brand.name") }}</a>
                         <p style="padding-right:20px; font-size:14px; line-height:1.8;">
-                            我们期待与您携手，共同探索碳中和技术与绿色材料的未来可能性。无论是技术咨询、产品合作还是定制开发，铂昕锐团队都将为您提供专业、高效的响应与服务。
+                            {{ t("footer.intro") }}
                         </p>
                     </div>
 
                     <div class="footer-col footer-links">
-                        <h4>快速导航</h4>
+                        <h4>{{ t("footer.quickNav") }}</h4>
                         <ul>
-                            <li><router-link to="/">首页</router-link></li>
-                            <li><router-link to="/aboutUs">关于我们</router-link></li>
-                            <li><router-link to="/products">产品中心</router-link></li>
-                            <li><router-link to="/news">新闻动态</router-link></li>
+                            <li><router-link to="/">{{ t("footer.links.home") }}</router-link></li>
+                            <li><router-link to="/aboutUs">{{ t("footer.links.About") }}</router-link></li>
+                            <li><router-link to="/products">{{ t("footer.links.products") }}</router-link></li>
+                            <li><router-link to="/news">{{ t("footer.links.news") }}</router-link></li>
                         </ul>
                     </div>
 
                     <div class="footer-col footer-links">
-                        <h4>关注我们</h4>
+                        <h4>{{ t("footer.followUs") }}</h4>
                         <ul>
-                            <li><i class="iconfont icon-weixin"></i> 铂昕锐BXR</li>
-                            <li><i class="iconfont icon-QQ"></i> 铂昕锐碳中和材料</li>
-                            <li><i class="iconfont icon-douyin"></i> 铂昕锐官方抖音</li>
+                            <li><i class="iconfont icon-weixin"></i>{{ t("footer.social.wechat") }}</li>
+                            <li><i class="iconfont icon-QQ"></i>{{ t("footer.social.qq") }}</li>
+                            <li><i class="iconfont icon-douyin"></i>{{ t("footer.social.douyin") }}</li>
                         </ul>
                     </div>
 
                     <div class="footer-col contact-list">
-                        <h4>联系方式</h4>
+                        <h4>{{ t("footer.contactTitle") }}</h4>
                         <ul>
-                            <li><i class="iconfont icon-weizhi"></i>浙江省衢州市柯城区凯旋北路3号</li>
-                            <li><i class="iconfont icon-youxiang"></i> contact@chemlink-qz.com</li>
-                            <li><i class="iconfont icon-f-phone-dianhua"></i> +86 570 1234 567</li>
-                            <li><i class="iconfont icon-chuanzhen"></i> +86 570 1234 568</li>
+                            <li><i class="iconfont icon-weizhi"></i>{{ t("footer.contact.address") }}</li>
+                            <li><i class="iconfont icon-youxiang"></i> {{ t("footer.contact.email") }}</li>
+                            <li><i class="iconfont icon-f-phone-dianhua"></i>{{ t("footer.contact.phone") }}</li>
+                            <li><i class="iconfont icon-chuanzhen"></i>{{ t("footer.contact.fax") }}</li>
                         </ul>
                     </div>
                 </div>
-
                 <div class="copyright">
-                    <p>© 2025 衢州化联科技有限公司 (ChemLink) | 版权所有</p>
+                    <p>{{ t("footer.copyright") }}</p>
                 </div>
             </div>
         </footer>
     </div>
 </template>
+
+<script setup>
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
+</script>
 
 <style scoped>
 footer {

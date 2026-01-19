@@ -9,11 +9,11 @@
                     </div>
                     <div class="flex flex-col justify-center select-none">
                         <div class="text-[17px] font-bold text-[#000] leading-tight tracking-wide">
-                            ChemLink 衢州化联
+                            {{ t("brand.name") }}
                         </div>
                         <div
                             class="text-[10px] text-slate-400 font-medium tracking-widest uppercase mt-[2px] scale-95 origin-left">
-                            Advanced Materials
+                            {{ t("brand.slogan") }}
                         </div>
                     </div>
                 </div>
@@ -23,35 +23,45 @@
                     <div class="flex items-center gap-10 mr-12">
                         <router-link to="/" class="nav-link text-center py-2" :class="{ 'active': $route.path === '/' }"
                             exact-active-class="active">
-                            首页
+                            {{ t("nav.home") }}
                         </router-link>
 
                         <router-link to="/about" class="nav-link text-center py-2"
                             :class="{ 'active': $route.path === '/aboutUs' }" active-class="active">
-                            关于我们
+                            {{ t("nav.about") }}
                         </router-link>
 
                         <router-link to="/products" class="nav-link text-center py-2"
                             :class="{ 'active': $route.path === '/products' }" active-class="active">
-                            产品中心
+                            {{ t("nav.products") }}
                         </router-link>
 
                         <router-link to="/news" class="nav-link text-center py-2"
                             :class="{ 'active': $route.path === '/news' }" active-class="active">
-                            新闻中心
+                            {{ t("nav.news") }}
                         </router-link>
 
                         <router-link to="/contact" class="nav-link text-center py-2"
                             :class="{ 'active': $route.path === '/contact' }" active-class="active">
-                            联系我们
+                            {{ t("nav.contact") }}
                         </router-link>
                     </div>
                     <div class="h-4 w-px bg-slate-300 mr-5"></div>
                     <div
                         class="text-[13px] font-medium text-slate-400 flex items-center gap-1 mr-6 cursor-pointer select-none">
-                        <span class="text-[#0060b0]">中</span>
+                        <span @click="changeLang('zh-CN')" :class="locale === 'zh-CN'
+                            ? 'text-[#0060b0] font-bold'
+                            : 'hover:text-slate-600 transition-colors'">
+                            {{ t("lang.zh") }}
+                        </span>
+
                         <span>|</span>
-                        <span class="hover:text-slate-600 transition-colors">EN</span>
+
+                        <span @click="changeLang('en-US')" :class="locale === 'en-US'
+                            ? 'text-[#0060b0] font-bold'
+                            : 'hover:text-slate-600 transition-colors'">
+                            {{ t("lang.en") }}
+                        </span>
                     </div>
                 </div>
 
@@ -70,27 +80,27 @@
                 <div class="flex flex-col p-4 gap-4">
                     <router-link to="/" class="nav-link text-center py-2 border-b border-slate-100"
                         :class="{ 'active': $route.path === '/' }" exact-active-class="active">
-                        首页
+                        {{ t("nav.home") }}
                     </router-link>
 
                     <router-link to="/about" class="nav-link text-center py-2 border-b border-slate-100"
                         :class="{ 'active': $route.path === '/aboutUs' }" active-class="active">
-                        关于我们
+                        {{ t("nav.about") }}
                     </router-link>
 
                     <router-link to="/products" class="nav-link text-center py-2 border-b border-slate-100"
                         :class="{ 'active': $route.path === '/products' }" active-class="active">
-                        产品中心
+                        {{ t("nav.products") }}
                     </router-link>
 
                     <router-link to="/news" class="nav-link text-center py-2 border-b border-slate-100"
                         :class="{ 'active': $route.path === '/news' }" active-class="active">
-                        新闻中心
+                        {{ t("nav.news") }}
                     </router-link>
 
                     <router-link to="/contact" class="nav-link text-center py-2"
                         :class="{ 'active': $route.path === '/contact' }" active-class="active">
-                        联系我们
+                        {{ t("nav.contact") }}
                     </router-link>
                 </div>
             </div>
@@ -101,10 +111,18 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import { useI18n } from "vue-i18n";
+const { t, locale } = useI18n();
 const isVisible = ref(false)
+
+
 const toggleMobileMenu = () => {
     isVisible.value = !isVisible.value
+}
+
+const changeLang = (lang) => {
+    locale.value = lang
+    localStorage.setItem("locale", lang)
 }
 </script>
 

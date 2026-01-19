@@ -3,16 +3,24 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <span class="hero-tag">科技创新型企业</span>
-                    <h1>碳中和技术的先行者</h1>
+                    <span class="hero-tag">{{ t("home.heroTag") }}</span>
+
+                    <h1>{{ t("home.heroTitle") }}</h1>
+
                     <div class="hero-divider"></div>
+
                     <p>
-                        专注于二氧化碳基高性能材料的研发、生产与应用推广。<br>
-                        致力于以工业废弃二氧化碳为原料，开发低碳、环保、可量化的碳基功能材料，推动碳中和目标的产业化实现。
+                        {{ t("home.heroDesc1") }}<br />
+                        {{ t("home.heroDesc2") }}
                     </p>
+
                     <div>
-                        <a href="products.html" class="btn-primary">浏览产品</a>
-                        <a href="#contact" class="btn-outline-white">联系我们</a>
+                        <a href="products.html" class="btn-primary">
+                            {{ t("home.btnProducts") }}
+                        </a>
+                        <a href="#contact" class="btn-outline-white">
+                            {{ t("home.btnContact") }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -24,130 +32,111 @@
                     <div class="feature-item">
                         <div class="feature-icon-box"><i class="fas fa-users-cog"></i></div>
                         <div class="feature-text">
-                            <h3>优秀的技术团队</h3>
-                            <p>协同高校及科研院所进行产业链研发，团队包含材料博士、教授及深耕产业链专家。</p>
+                            <h3>{{ t("home.features.t1") }}</h3>
+                            <p>{{ t("home.features.d1") }}</p>
                         </div>
                     </div>
+
                     <div class="feature-item">
                         <div class="feature-icon-box"><i class="fas fa-file-contract"></i></div>
                         <div class="feature-text">
-                            <h3>专业定制化服务</h3>
-                            <p>快速响应客户需求，提供从研发、生产、测试到售后的全流程定制产品服务。</p>
+                            <h3>{{ t("home.features.t2") }}</h3>
+                            <p>{{ t("home.features.d2") }}</p>
                         </div>
                     </div>
+
                     <div class="feature-item">
                         <div class="feature-icon-box"><i class="fas fa-flask"></i></div>
                         <div class="feature-text">
-                            <h3>研发实力雄厚</h3>
-                            <p>高度重视并保持高水平研发投入，坚持技术创新，保证产品的先进性。</p>
+                            <h3>{{ t("home.features.t3") }}</h3>
+                            <p>{{ t("home.features.d3") }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+
         <section id="about" class="section-padding">
             <div class="container">
                 <div class="about-grid">
                     <div class="about-text">
-                        <h4 style="color:var(--brand-blue); font-weight:bold; margin-bottom:10px;">关于我们 / ABOUT US</h4>
-                        <h2 class="section-title">二氧化碳基材料的<br>负碳革新者</h2>
+                        <h4 style="color:var(--brand-blue); font-weight:bold; margin-bottom:10px;">
+                            {{ t("home.about.label") }} / {{ t("home.about.labelEn") }}
+                        </h4>
+
+                        <h2 class="section-title" style="white-space: pre-line;">
+                            {{ t("home.about.title") }}
+                        </h2>
+
                         <p class="text-desc">
-                            铂昕锐（BXR）是一家专注于二氧化碳基高性能材料的研发、生产与应用推广的科技创新型企业。公司以“碳中和技术的先行者”为愿景，致力于以工业废弃二氧化碳为原料，开发低碳、环保、可量化的碳基功能材料，推动碳中和目标的产业化实现。
+                            {{ t("home.about.p1") }}
                         </p>
+
                         <p class="text-desc">
-                            我们自主研发的二氧化碳基聚氨酯多元醇（PPC）及负碳醇（NCA-PC25）等产品，已成功应用于运动鞋材、防水涂料、合成革、医疗器械等多个领域，获得安踏、特步、科顺等行业头部客户的认可。通过权威第三方碳足迹认证（如必维BV），我们为客户提供可验证的低碳材料解决方案。
+                            {{ t("home.about.p2") }}
                         </p>
+
                         <p class="text-desc">
-                            未来，我们将持续深耕绿色材料技术，构建从碳源到终端应用的完整产业生态，致力于成为全球领先的碳中和材料系统供应商。
+                            {{ t("home.about.p3") }}
                         </p>
+
                         <div style="margin-top:30px;">
-                            <span style="font-weight:bold; margin-right:20px;"><i class="fas fa-check-circle"
-                                    style="color:var(--brand-blue);"></i> 必维(BV)碳足迹认证</span>
-                            <span style="font-weight:bold;"><i class="fas fa-check-circle"
-                                    style="color:var(--brand-blue);"></i> 头部客户认可</span>
+                            <span style="font-weight:bold; margin-right:20px;">
+                                <i class="fas fa-check-circle" style="color:var(--brand-blue);"></i>
+                                {{ t("home.about.badge1") }}
+                            </span>
+
+                            <span style="font-weight:bold;">
+                                <i class="fas fa-check-circle" style="color:var(--brand-blue);"></i>
+                                {{ t("home.about.badge2") }}
+                            </span>
                         </div>
                     </div>
+
                     <div class="about-img">
-                        <img src="../images/企业图.png" alt="Factory Building">
+                        <img src="../images/企业图.png" alt="Factory Building" />
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="products" class="section-padding bg-gray">
-            <div class="container">
-                <div style="text-align:center; max-width:700px; margin:0 auto;">
-                    <h2 class="section-title">核心产品系列</h2>
-                    <p style="color:#666;">从“碳源”到“材料”的绿色闭环，为您提供高性能、低碳足迹的材料解决方案。</p>
-                </div>
-
-                <div class="product-card-grid">
-                    <div class="prod-card">
-                        <div class="prod-img">
-                            <img src="../images/负碳醇.png" alt="NCA Series Application">
-                        </div>
-                        <div class="prod-body">
-                            <span class="prod-cat">NCA Series</span>
-                            <h3 class="prod-title">负碳醇 (NCA-PC25)</h3>
-                            <p class="prod-desc">
-                                基于二氧化碳基聚氨酯技术，通过创新工艺将废弃二氧化碳转化为高性能多元醇。每生产1吨可减少约192kg碳排放。
-                            </p>
-                            <div class="prod-meta">
-                                <span class="tag">运动鞋材</span>
-                                <span class="tag">高回弹</span>
-                                <span class="tag">BV认证</span>
-                            </div>
-                            <a href="starProduct_NCA.html" style="color:var(--brand-blue); font-weight:bold;">查看详情 <i
-                                    class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-
-                    <div class="prod-card">
-                        <div class="prod-img">
-                            <img src="../images/CO2FIT.png" alt="CO2FIT Series Yoga Mat">
-                        </div>
-                        <div class="prod-body">
-                            <span class="prod-cat">CO<sub>2</sub>FIT Series</span>
-                            <h3 class="prod-title">CO<sub>2</sub>FIT 258 弹性体</h3>
-                            <p class="prod-desc">
-                                二氧化碳基高性能弹性体材料。具备优异的抗化学性、回弹性及抗撕裂性。适用于瑜伽垫、发泡鞋材等。
-                            </p>
-                            <div class="prod-meta">
-                                <span class="tag">瑜伽垫</span>
-                                <span class="tag">高防滑</span>
-                                <span class="tag">低碳足迹</span>
-                            </div>
-                            <a href="starProduct_CO2FIT.html" style="color:var(--brand-blue); font-weight:bold;">查看详情 <i
-                                    class="fas fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <section id="news" class="section-padding">
             <div class="container">
                 <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:20px;">
-                    <h2 class="section-title" style="margin-bottom:0;">新闻中心</h2>
-                    <a href="#" style="color:var(--brand-blue); font-weight:bold;">查看更多 ></a>
+                    <h2 class="section-title" style="margin-bottom:0;">
+                        {{ t("home.news.title") }}
+                    </h2>
+
+                    <a href="#" style="color:var(--brand-blue); font-weight:bold;">
+                        {{ t("home.news.more") }}
+                    </a>
                 </div>
+
                 <!-- 从wordpress导入数据 -->
                 <div class="news-grid">
                     <div v-for="id in 3" class="news-item" :key="id">
-                        <span class="date">2025-11-18</span>
-                        <a href="#" class="news-title">亮相2025中国国际新材料产业博览会</a>
+                        <span class="date">{{ t("home.news.sampleDate") }}</span>
+
+                        <a href="#" class="news-title">
+                            {{ t("home.news.sampleTitle") }}
+                        </a>
+
                         <p class="news-excerpt">
-                            携NCA-PC25负碳醇系列产品参展，展示二氧化碳基聚氨酯材料在运动健康、绿色建材等领域的创新应用...
+                            {{ t("home.news.sampleExcerpt") }}
                         </p>
                     </div>
                 </div>
                 <!-- 导完 -->
             </div>
         </section>
+
     </div>
 </template>
 <script setup>
+import { useI18n } from "vue-i18n";
+const { t } = useI18n();
 
 </script>
 
