@@ -126,7 +126,14 @@ export default {
 
     detail: "查看详情"
   },
-   footer: {
+   news: {
+    title: "新闻中心",
+    subtitle: "最新动态与行业资讯",
+    related: "相关新闻",
+    backToList: "返回列表"
+  },
+  
+  footer: {
     brand: {
       name: "ChemLink 衢州化联",
     },

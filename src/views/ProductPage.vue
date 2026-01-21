@@ -189,7 +189,7 @@ async function loadCatalog() {
 onMounted(loadCatalog)
 
 // helpers：根据当前语言选择展示字段
-const isEn = computed(() => String(locale.value).toLowerCase().startsWith('en'))
+const isEn = computed(() => String(locale).toLowerCase().startsWith('en'))
 
 function pickText(zh, en) {
     const z = (zh ?? '').toString().trim()

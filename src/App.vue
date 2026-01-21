@@ -11,7 +11,9 @@ import FooterComponent from './components/FooterComponent.vue'
     <HeaderComponent />
 
     <main class="content">
-      <router-view />
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
     </main>
 
     <FooterComponent />
@@ -37,5 +39,16 @@ body,
 .content {
   flex: 1;
   /* 关键：内容区域自动撑开，把footer顶到底部 */
+}
+
+/* 语言切换过渡效果 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

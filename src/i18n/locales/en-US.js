@@ -125,6 +125,12 @@ export default {
 
     detail: "View Detail"
   },
+  news: {
+    title: "News Center",
+    subtitle: "Latest Updates and Industry News",
+    related: "Related News",
+    backToList: "Back to List"
+  },
   footer: {
     brand: {
       name: "ChemLink",

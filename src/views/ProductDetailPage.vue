@@ -149,7 +149,7 @@ const productDetail = ref(null)
 const product = computed(() => {
     const raw = productDetail.value || {}
     const acf = raw.acf || {}
-    const isEn = String(locale.value || '').toLowerCase().startsWith('en')
+    const isEn = String(locale || '').toLowerCase().startsWith('en')
 
     return {
         id: raw.id,

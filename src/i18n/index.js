@@ -13,7 +13,8 @@ const i18n = createI18n({
   legacy: false,
   locale: defaultLocale,
   fallbackLocale: "zh-CN",
-  messages
+  messages,
+  globalInjection: true
 });
 
 export default i18n;

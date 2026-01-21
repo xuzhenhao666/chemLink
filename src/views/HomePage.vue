@@ -109,22 +109,22 @@
                         {{ t("home.news.title") }}
                     </h2>
 
-                    <a href="#" style="color:var(--brand-blue); font-weight:bold;">
+                    <a href="/news" style="color:var(--brand-blue); font-weight:bold;">
                         {{ t("home.news.more") }}
                     </a>
                 </div>
 
                 <!-- 从wordpress导入数据 -->
                 <div class="news-grid">
-                    <div v-for="id in 3" class="news-item" :key="id">
-                        <span class="date">{{ t("home.news.sampleDate") }}</span>
+                    <div v-for="news in featuredNews" class="news-item" :key="news.id">
+                        <span class="date">{{ news.date }}</span>
 
-                        <a href="#" class="news-title">
-                            {{ t("home.news.sampleTitle") }}
+                        <a :href="`/news/${news.id}`" class="news-title">
+                            {{ news.title[locale] || news.title['zh-CN'] }}
                         </a>
 
                         <p class="news-excerpt">
-                            {{ t("home.news.sampleExcerpt") }}
+                            {{ news.excerpt[locale] || news.excerpt['zh-CN'] }}
                         </p>
                     </div>
                 </div>
@@ -136,8 +136,16 @@
 </template>
 <script setup>
 import { useI18n } from "vue-i18n";
-const { t } = useI18n();
+import { computed } from "vue";
+const { t, locale } = useI18n();
 
+// 导入新闻数据
+import { newsList } from "@/data/news";
+
+// 随机选择3个新闻
+const featuredNews = computed(() => {
+  return newsList.slice(0, 3);
+});
 </script>
 
 <style>
