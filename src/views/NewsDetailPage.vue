@@ -11,30 +11,25 @@
         <section id="news-detail" class="section-padding">
             <div class="container">
                 <!-- 加载状态 -->
-                <div v-if="loading" class="text-center py-20">
-                    <div class="loading-spinner"></div>
-                </div>
-                
-                <!-- 错误状态 -->
-                <div v-else-if="error" class="text-center py-20 text-slate-500">
-                    {{ t("news.empty") }}
-                    <button class="btn-primary mt-4" @click="loadNewsDetail">
-                        {{ t("news.retry") }}
-                    </button>
-                </div>
-                
-                <!-- 新闻内容 -->
-                <div v-else class="news-detail-wrapper">
-                    <article class="news-detail-content">
-                        <h2 class="detail-title">{{ currentNews.title }}</h2>
-                        <div class="detail-meta">
-                            <span class="detail-date">{{ currentNews.date }}</span>
-                        </div>
-                        <div class="detail-body">
-                            <p>{{ currentNews.content }}</p>
-                        </div>
-                    </article>
-                </div>
+            <div v-if="loading" class="text-center py-20">
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <!-- 新闻内容 -->
+            <div v-else-if="currentNews.id" class="news-detail-wrapper">
+                <article class="news-detail-content">
+                    <h2 class="detail-title">{{ currentNews.title }}</h2>
+                    <div class="detail-meta">
+                        <span class="detail-date">{{ currentNews.date }}</span>
+                    </div>
+                    <div class="detail-body">
+                        <p>{{ currentNews.content }}</p>
+                    </div>
+                </article>
+            </div>
+            
+            <!-- 没有数据时显示空白 -->
+            <div v-else></div>
 
 
             </div>
