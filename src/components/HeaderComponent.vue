@@ -5,7 +5,7 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-3">
                     <div class="w-[38px] h-[38px] bg-[#0060b0] rounded-[3px] flex items-center justify-center shrink-0">
-                        <!-- logo位置,暂无 -->
+                        <span class="text-white font-bold text-lg">CL</span>
                     </div>
                     <div class="flex flex-col justify-center select-none">
                         <div class="text-[17px] font-bold text-[#000] leading-tight tracking-wide">

@@ -3,6 +3,7 @@ import HomePage from '@/views/HomePage.vue'
 import ProductPage from '@/views/ProductPage.vue'
 import ProductDetailPage from '@/views/ProductDetailPage.vue'
 import NcaProductDetailPage from '@/views/NcaProductDetailPage.vue'
+import Co2fitProductDetailPage from '@/views/Co2fitProductDetailPage.vue'
 import NewsPage from '@/views/NewsPage.vue'
 import NewsDetailPage from '@/views/NewsDetailPage.vue'
 import AboutPage from '@/views/AboutPage.vue'
@@ -54,6 +55,15 @@ const router = createRouter({
     {
       path: '/products/nca-pc25',
       redirect: '/nca-pc25', // 重定向到主要路由
+    },
+    {
+      path: '/co2fit-258',
+      name: 'co2fit-258',
+      component: Co2fitProductDetailPage, // CO₂FIT 258 详情页面
+    },
+    {
+      path: '/products/co2fit-258',
+      redirect: '/co2fit-258', // 重定向到主要路由
     },
   ],
   props: true // 将路由参数解耦为组件的 props

@@ -33,10 +33,10 @@
                     </button>
                 </div>
 
-                <!-- 正常详情（跟 detail.html 一样的三列 Grid） -->
+                <!-- 正常详情（两列布局：左侧信息 + 右侧正文） -->
                 <div v-else class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                     <!-- 左侧：编号信息 + 返回 -->
-                    <div class="lg:col-span-3 order-2 lg:order-1">
+                    <div class="lg:col-span-4 order-2 lg:order-1">
                         <div class="bg-white rounded-[4px] shadow-sm border border-slate-100 overflow-hidden">
                             <div class="flex justify-between items-center px-5 py-4 border-b border-slate-50">
                                 <span class="text-sm text-slate-400">{{ t("productsPage.info.item") }}</span>
@@ -68,9 +68,9 @@
                         </button>
                     </div>
 
-                    <!-- 中间：正文 -->
+                    <!-- 右侧：正文内容（占据更多空间） -->
                     <div
-                        class="lg:col-span-6 order-1 lg:order-2 bg-white rounded-[4px] shadow-sm border border-slate-100 p-8 min-h-[500px]">
+                        class="lg:col-span-8 order-1 lg:order-2 bg-white rounded-[4px] shadow-sm border border-slate-100 p-8 min-h-[500px]">
                         <h1 class="text-2xl font-bold text-[#002B4D] mb-8 leading-tight">
                             {{ product.title || "-" }}
                         </h1>
@@ -97,32 +97,6 @@
                             <p class="text-slate-600 text-sm leading-relaxed text-justify">
                                 {{ product.uses || t("productsPage.usesEmpty") }}
                             </p>
-                        </div>
-                    </div>
-
-                    <!-- 右侧：操作卡片 -->
-                    <div class="lg:col-span-3 order-3 lg:order-3">
-                        <div class="bg-white rounded-[4px] shadow-sm border border-slate-100 p-6 sticky top-24">
-                            <div class="text-sm font-bold text-slate-800 mb-4 text-center">
-                                {{ t("productsPage.actionsTitle") }}
-                            </div>
-
-                            <div class="space-y-3">
-                                <button
-                                    class="w-full btn-primary py-2.5 rounded-[2px] text-sm font-bold transition shadow-sm"
-                                    @click="onRequestSample">
-                                    {{ t("productsPage.btnSample") }}
-                                </button>
-
-                                <button class="w-full btn-outline py-2.5 rounded-[2px] text-sm font-bold transition"
-                                    @click="onRequestDocs">
-                                    {{ t("productsPage.btnDocs") }}
-                                </button>
-                            </div>
-
-                            <div class="mt-4 text-xs text-slate-400 leading-6">
-                                {{ t("productsPage.tip") }}
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -187,16 +161,6 @@ const getProductDetail = async (id) => {
 }
 
 const goBackToList = () => router.push("/products")
-
-const onRequestSample = () => {
-    // 先留空：你后续可接“申请样品”表单
-    alert("已点击：申请样品（后续可接表单/接口）")
-}
-
-const onRequestDocs = () => {
-    // 先留空：你后续可接“MSDS/TDS 下载/申请”
-    alert("已点击：获取 MSDS/TDS（后续可接下载/接口）")
-}
 
 // 支持路由变化时复用组件（/products/:id 切换不同 id）
 watch(

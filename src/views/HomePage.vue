@@ -145,10 +145,10 @@
 </span>
                                 <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">低碳足迹</span>
                             </div>
-                            <button class="flex items-center gap-2 text-[#0060b0] font-bold transition-all duration-300 group-hover:gap-3">
+                            <router-link to="/co2fit-258" class="flex items-center gap-2 text-[#0060b0] font-bold transition-all duration-300 group-hover:gap-3">
                                 <span>查看详情</span>
                                 <i class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
-                            </button>
+                            </router-link>
                         </div>
                     </div>
                 </div>
