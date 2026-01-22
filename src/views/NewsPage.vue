@@ -13,9 +13,7 @@
                 <div v-if="loading" class="text-center py-20">
                     <div class="loading-spinner"></div>
                 </div>
-                <div v-else-if="newsList.length === 0" class="text-center py-20 text-slate-500">
-                    {{ t("news.empty") }}
-                </div>
+                <div v-else-if="newsList.length === 0"></div>
                 <div v-else class="news-grid">
                     <div class="news-item" v-for="news in paginatedNews" :key="news.id">
                         <div class="news-content">

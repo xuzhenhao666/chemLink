@@ -15,12 +15,12 @@
                     </p>
 
                     <div>
-                        <a href="products.html" class="btn-primary">
+                        <router-link to="/products" class="btn-primary">
                             {{ t("home.btnProducts") }}
-                        </a>
-                        <a href="#contact" class="btn-outline-white">
+                        </router-link>
+                        <router-link to="/contact" class="btn-outline-white">
                             {{ t("home.btnContact") }}
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -102,6 +102,59 @@
         </section>
 
 
+        <!-- 核心产品系列 -->
+        <section id="core-products" class="section-padding bg-white">
+            <div class="container">
+                <div class="text-center mb-16">
+                    <h2 class="section-title text-3xl font-bold text-slate-900 mb-4">核心产品系列</h2>
+                    <p class="text-slate-500 text-base max-w-2xl mx-auto">以客户需求为研发导向，为您提供性能、稳定的新材料解决方案。</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                    <!-- 产品1 -->
+                    <div class="product-showcase group bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                        <div class="product-image-wrapper bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+                            <img src="/src/assets/images/负碳醇.png" alt="CO₂基聚碳酸酯多元醇 Cardiol 2202" class="w-full h-auto max-h-60 object-contain transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="product-info p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0060b0] transition-colors">负碳醇 (NCA-PC25)</h3>
+                            <p class="text-sm text-slate-600 mb-5 leading-relaxed">基于二氧化碳基聚氨酯技术，通过创新工艺将废弃二氧化碳转化为高性能多元醇。每生产1吨可减少约192kg碳排放。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">运动鞋材</span>
+                                <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">高回弹</span>
+                                <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">BV认证</span>
+                            </div>
+                            <router-link to="/nca-pc25" class="flex items-center gap-2 text-[#0060b0] font-bold transition-all duration-300 group-hover:gap-3">
+                                <span>查看详情</span>
+                                <i class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </router-link>
+                        </div>
+                    </div>
+                    
+                    <!-- 产品2 -->
+                    <div class="product-showcase group bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                        <div class="product-image-wrapper bg-gradient-to-br from-slate-50 to-slate-100 p-6">
+                            <img src="/src/assets/images/CO2FIT.png" alt="CO₂FIT 258 增塑体" class="w-full h-auto max-h-60 object-contain transition-transform duration-500 group-hover:scale-105">
+                        </div>
+                        <div class="product-info p-6">
+                            <h3 class="text-xl font-bold text-slate-900 mb-3 group-hover:text-[#0060b0] transition-colors">CO₂FIT 258 增塑体</h3>
+                            <p class="text-sm text-slate-600 mb-5 leading-relaxed">二氧化碳基高性能弹性体材料。具备优异的抗化学性、回弹性及抗撕裂性。适用于瑜伽垫、发泡鞋材等。</p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">瑜伽垫</span>
+                                <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">高防滑
+</span>
+                                <span class="px-3 py-1 bg-[#0060b0]/5 text-[#0060b0] text-xs font-medium rounded-full">低碳足迹</span>
+                            </div>
+                            <router-link to="/co2fit-258" class="flex items-center gap-2 text-[#0060b0] font-bold transition-all duration-300 group-hover:gap-3">
+                                <span>查看详情</span>
+                                <i class="fas fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
+                            </router-link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="news" class="section-padding">
             <div class="container">
                 <div style="display:flex; justify-content:space-between; align-items:end; margin-bottom:20px;">
@@ -109,9 +162,9 @@
                         {{ t("home.news.title") }}
                     </h2>
 
-                    <a href="/news" style="color:var(--brand-blue); font-weight:bold;">
+                    <router-link to="/news" style="color:var(--brand-blue); font-weight:bold;">
                         {{ t("home.news.more") }}
-                    </a>
+                    </router-link>
                 </div>
 
                 <!-- 从wordpress导入数据 -->
@@ -119,9 +172,9 @@
                     <div v-for="news in featuredNews" class="news-item" :key="news.id">
                         <span class="date">{{ formatDate(news.acf.date || news.date) }}</span>
 
-                        <a :href="`/news/${news.id}`" class="news-title">
+                        <router-link :to="`/news/${news.id}`" class="news-title">
                             {{ news.acf.title || news.title.rendered }}
-                        </a>
+                        </router-link>
 
                         <p class="news-excerpt">
                             {{ news.acf.content }}
