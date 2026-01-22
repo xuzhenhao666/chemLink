@@ -15,12 +15,12 @@
                     </p>
 
                     <div>
-                        <a href="products.html" class="btn-primary">
+                        <router-link to="/products" class="btn-primary">
                             {{ t("home.btnProducts") }}
-                        </a>
-                        <a href="#contact" class="btn-outline-white">
+                        </router-link>
+                        <router-link to="/contact" class="btn-outline-white">
                             {{ t("home.btnContact") }}
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -162,9 +162,9 @@
                         {{ t("home.news.title") }}
                     </h2>
 
-                    <a href="/news" style="color:var(--brand-blue); font-weight:bold;">
+                    <router-link to="/news" style="color:var(--brand-blue); font-weight:bold;">
                         {{ t("home.news.more") }}
-                    </a>
+                    </router-link>
                 </div>
 
                 <!-- 从wordpress导入数据 -->
@@ -172,9 +172,9 @@
                     <div v-for="news in featuredNews" class="news-item" :key="news.id">
                         <span class="date">{{ formatDate(news.acf.date || news.date) }}</span>
 
-                        <a :href="`/news/${news.id}`" class="news-title">
+                        <router-link :to="`/news/${news.id}`" class="news-title">
                             {{ news.acf.title || news.title.rendered }}
-                        </a>
+                        </router-link>
 
                         <p class="news-excerpt">
                             {{ news.acf.content }}
