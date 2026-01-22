@@ -27,7 +27,7 @@
                         </router-link>
 
                         <router-link to="/about" class="nav-link text-center py-2"
-                            :class="{ 'active': $route.path === '/aboutUs' }" active-class="active">
+                            :class="{ 'active': $route.path === '/about' }" active-class="active">
                             {{ t("nav.about") }}
                         </router-link>
 
@@ -84,7 +84,7 @@
                     </router-link>
 
                     <router-link to="/about" class="nav-link text-center py-2 border-b border-slate-100"
-                        :class="{ 'active': $route.path === '/aboutUs' }" active-class="active">
+                        :class="{ 'active': $route.path === '/about' }" active-class="active">
                         {{ t("nav.about") }}
                     </router-link>
 

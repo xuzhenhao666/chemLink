@@ -158,7 +158,7 @@ export default {
 
     contact: {
       address: "No. 3 Kaixuan North Rd., Kecheng District, Quzhou, Zhejiang, China",
-      email: "contact@chemlink-qz.com",
+      email: "contact{'@'}chemlink-qz.com",
       phone: "+86 570 1234 567",
       fax: "+86 570 1234 568"
     },

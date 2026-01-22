@@ -224,7 +224,7 @@ export default {
       },
       email: {
         title: "电子邮箱",
-        content: "contact@chemlink-qz.com"
+        content: "contact{'@'}chemlink-qz.com"
       }
     },
     
