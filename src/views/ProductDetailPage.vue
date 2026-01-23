@@ -41,21 +41,21 @@
                             <div class="flex justify-between items-center px-5 py-4 border-b border-slate-50">
                                 <span class="text-sm text-slate-400">{{ t("productsPage.info.item") }}</span>
                                 <span class="text-sm font-bold text-slate-700 font-mono">
-                                    {{ product.item || "-" }}
+                                    {{ viewProduct.item || "-" }}
                                 </span>
                             </div>
 
                             <div class="flex justify-between items-center px-5 py-4 border-b border-slate-50">
                                 <span class="text-sm text-slate-400">{{ t("productsPage.info.cas") }}</span>
                                 <span class="text-sm font-bold text-slate-700 font-mono">
-                                    {{ product.cas || "-" }}
+                                    {{ viewProduct.cas || "-" }}
                                 </span>
                             </div>
 
                             <div class="flex justify-between items-center px-5 py-4">
                                 <span class="text-sm text-slate-400">{{ t("productsPage.info.ec") }}</span>
                                 <span class="text-sm font-bold text-slate-700 font-mono">
-                                    {{ product.ec || "-" }}
+                                    {{ viewProduct.ec || "-" }}
                                 </span>
                             </div>
                         </div>
@@ -71,31 +71,34 @@
                     <!-- 中间：正文 -->
                     <div
                         class="lg:col-span-6 order-1 lg:order-2 bg-white rounded-[4px] shadow-sm border border-slate-100 p-8 min-h-[500px]">
-                        <h1 class="text-2xl font-bold text-[#002B4D] mb-8 leading-tight">
-                            {{ product.title || "-" }}
+                        <h1 class="text-2xl font-bold text-[#002B4D] mb-2 leading-tight">
+                            {{ viewProduct.title || "-" }}
                         </h1>
+                        <p v-if="viewProduct.altTitle" class="text-sm text-slate-400 mb-8">
+                            {{ viewProduct.altTitle }}
+                        </p>
 
                         <div class="mb-8">
                             <h3 class="section-badge">{{ t("productsPage.descTitle") }}</h3>
                             <p class="text-slate-600 text-sm leading-relaxed text-justify">
-                                {{ product.desc || t("productsPage.descEmpty") }}
+                                {{ viewProduct.desc || t("productsPage.descEmpty") }}
                             </p>
                         </div>
 
                         <div class="mb-8">
                             <h3 class="section-badge">{{ t("productsPage.groupTitle") }}</h3>
-                            <p class="text-slate-600 text-sm">{{ product.category || "-" }}</p>
+                            <p class="text-slate-600 text-sm">{{ viewProduct.category || "-" }}</p>
                         </div>
 
-                        <div v-if="product.synonyms" class="mb-8">
+                        <div v-if="viewProduct.synonyms" class="mb-8">
                             <h3 class="section-badge">{{ t("productsPage.synonymsTitle") }}</h3>
-                            <p class="text-slate-600 text-sm">{{ product.synonyms }}</p>
+                            <p class="text-slate-600 text-sm">{{ viewProduct.synonyms }}</p>
                         </div>
 
                         <div class="mb-2">
                             <h3 class="section-badge">{{ t("productsPage.usesTitle") }}</h3>
                             <p class="text-slate-600 text-sm leading-relaxed text-justify">
-                                {{ product.uses || t("productsPage.usesEmpty") }}
+                                {{ viewProduct.uses || t("productsPage.usesEmpty") }}
                             </p>
                         </div>
                     </div>
@@ -119,10 +122,6 @@
                                     {{ t("productsPage.btnDocs") }}
                                 </button>
                             </div>
-
-                            <div class="mt-4 text-xs text-slate-400 leading-6">
-                                {{ t("productsPage.tip") }}
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,52 +134,111 @@
 <script setup>
 import { computed, ref, watch } from "vue"
 import { useRoute, useRouter } from "vue-router"
-import { apiGetProducts } from "@/api/getProducts";
-import { useI18n } from "vue-i18n";
-const { t, locale } = useI18n();
+import { apiGetProducts } from "@/api/getProducts"
+import { useI18n } from "vue-i18n"
 
+const { t, locale } = useI18n()
 const router = useRouter()
 const route = useRoute()
+
 const loading = ref(false)
-const productDetail = ref(null)
+/**
+ * 经过清洗后的产品数据（只保留页面需要的字段）
+ * {
+ *  id, slug, link, modified,
+ *  name: { zh, en },
+ *  description: { zh, en },
+ *  application: { zh, en },
+ *  category: { zh, en },
+ *  item, cas, ec
+ * }
+ */
+const productRaw = ref(null)
 
+const isEn = computed(() => String(locale.value || "").toLowerCase().startsWith("en"))
 
-// 把后端返回的数据（尤其是 ACF 字段）映射为页面统一使用的字段名
-const product = computed(() => {
-    const raw = productDetail.value || {}
+const stripHtml = (s) => String(s || "").replace(/<[^>]+>/g, "").trim()
+
+const normalizeProduct = (raw) => {
+    if (!raw || !raw.id) return null
     const acf = raw.acf || {}
-    const isEn = String(locale || '').toLowerCase().startsWith('en')
 
     return {
         id: raw.id,
-        // 标题：优先使用 ACF 的中/英产品名；没有则回退 WP title
-        title: isEn ? (acf.name_en || raw.title?.rendered || "") : (acf.name || raw.title?.rendered || ""),
+        slug: raw.slug || "",
+        link: raw.link || "",
+        modified: raw.modified || "",
+        // 中英字段分开存，方便按 locale 切换
+        name: {
+            zh: (acf.name || stripHtml(raw.title?.rendered)) || "",
+            en: acf.name_en || "",
+        },
         item: acf.item || "",
         cas: acf.cas || "",
         ec: acf.ec || "",
-        // 描述 & 用途
-        desc: isEn ? (acf.description_en || "") : (acf.description || ""),
-        uses: isEn ? (acf.application_en || "") : (acf.application || ""),
-        category: isEn ? (acf.category_en || "") : (acf.category || ""),
-        // 其它字段（如果后续要用）
-        link: raw.link || "",
+        description: {
+            zh: acf.description || "",
+            en: acf.description_en || "",
+        },
+        application: {
+            zh: acf.application || "",
+            en: acf.application_en || "",
+        },
+        category: {
+            zh: acf.category || "",
+            en: acf.category_en || "",
+        },
+    }
+}
+
+// 页面最终使用的数据（根据 locale 自动选择中/英）
+const viewProduct = computed(() => {
+    const p = productRaw.value
+    if (!p) return {}
+
+    const lang = isEn.value ? "en" : "zh"
+    const other = isEn.value ? "zh" : "en"
+
+    const title = p.name?.[lang] || p.name?.[other] || ""
+    const altTitle = p.name?.[other] && p.name?.[other] !== title ? p.name[other] : ""
+
+    return {
+        id: p.id,
+        title,
+        altTitle,
+        item: p.item,
+        cas: p.cas,
+        ec: p.ec,
+        desc: p.description?.[lang] || p.description?.[other] || "",
+        uses: p.application?.[lang] || p.application?.[other] || "",
+        category: p.category?.[lang] || p.category?.[other] || "",
+        // 如果后续需要扩展字段，这里统一从 normalizeProduct 加即可
+        link: p.link,
+        modified: p.modified,
     }
 })
 
-const notFound = computed(() => !loading.value && !product.value?.id)
+const notFound = computed(() => !loading.value && !viewProduct.value?.id)
 
 const getProductDetail = async (id) => {
     if (!id) {
-        productDetail.value = null
+        productRaw.value = null
         return
     }
     loading.value = true
     try {
-        // 你的 apiGetProducts 使用 axios params，需要传对象才能生成 ?id=xxx
+        // 兼容：apiGetProducts 可能接收 {id} 或直接接收 id
         const result = await apiGetProducts({ id })
-        // 兼容：有的接口直接返回对象；有的返回数组/对象包装
-        productDetail.value = Array.isArray(result) ? (result[0] || null) : (result?.data ?? result ?? null)
-        console.log("productDetail=", productDetail.value)
+        const payload = result?.data ?? result
+
+        // 兼容：有的接口返回数组（列表筛选），取第一个
+        const raw = Array.isArray(payload) ? (payload[0] || null) : payload
+
+        productRaw.value = normalizeProduct(raw)
+        console.log("product(normalized)=", productRaw.value)
+    } catch (e) {
+        console.error(e)
+        productRaw.value = null
     } finally {
         loading.value = false
     }
@@ -189,12 +247,10 @@ const getProductDetail = async (id) => {
 const goBackToList = () => router.push("/products")
 
 const onRequestSample = () => {
-    // 先留空：你后续可接“申请样品”表单
     alert("已点击：申请样品（后续可接表单/接口）")
 }
 
 const onRequestDocs = () => {
-    // 先留空：你后续可接“MSDS/TDS 下载/申请”
     alert("已点击：获取 MSDS/TDS（后续可接下载/接口）")
 }
 
